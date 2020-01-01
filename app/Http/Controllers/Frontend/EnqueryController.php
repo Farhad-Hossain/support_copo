@@ -57,4 +57,14 @@ class EnqueryController extends Controller
 
     	return redirect()->back()->with('success', 'Submited succesfully, We will contact with you soon,');
     }
+
+    public function institute_query_history(Request $request)
+    {
+        $eiin = $request->eiin;
+        $password = $request->password;
+
+        $enqueries = Enquery::where(['eiin'=>$eiin, 'eiin_password'=>$password])->get();
+        
+        return view('view_history', compact('enqueries', 'eiin'));
+    }
 }

@@ -13,6 +13,17 @@
     <link href="{{ asset('assets') }}/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="{{ asset('assets') }}/form-validation.css" rel="stylesheet">
+
+    <style>
+      .history_form_input{
+        border: 1px solid darkgrey; padding: 3px; border-radius: 3px; display: block;
+        margin-top: 3px;
+      }
+      td hr{
+        padding: 0px; 
+        margin: 0px;
+      }
+    </style>
   </head>
 
   <body style="background: #eee">
@@ -46,6 +57,18 @@
                 <small class="text-muted">Instraction here ...</small>
               </div>
             </li>
+
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <form action="{{ route('institute_query_history') }}" method="POST">
+              @csrf
+                <input type="number" placeholder="EIIN" class="history_form_input" min="0" name="eiin" required>
+                <input type="Password" placeholder="Password" class="history_form_input" name="password" required>
+                <input type="submit" value="See My Queries" class="history_form_input">
+              </form>
+            </li>
+
+            
+
             <!-- 
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>

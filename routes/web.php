@@ -36,3 +36,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('institute-query-history', 'Frontend\EnqueryController@institute_query_history')->name('institute_query_history');
