@@ -29,7 +29,7 @@
         </div>
 
         <div>
-            <table class="table table-bordered table-striped table-sm">
+            <table class="table table-bordered table-striped table-sm" style="font-size: 90%;">
                 <thead>
                     <tr>
                         <th>Sl.</th>
@@ -65,7 +65,7 @@
                                 <span style="color: red;">Rejected</span>
                             @endif
                             <hr />
-                            <span style="color: red;">by {{$enquery->actioned_user['name']}}</span>
+                            <!-- <span style="color: red;">{{ 'by '.$enquery->actioned_user['name'] ?? '' }}</span> -->
                             
                         </td>
                         <td class="align-middle">

@@ -23,6 +23,13 @@ Route::group(['prefix'=>'admin', 'namespace'=>'Backend', 'as'=>'backend.', 'midd
 	Route::get('service-add', 'ServiceController@add_service_view')->name('add_service');
 	Route::post('service-add', 'ServiceController@insert_a_service');
 	Route::get('services', 'ServiceController@index')->name('services');
+
+	Route::post('service-edit', 'ServiceController@edit')->name('edit_service');
+	Route::post('service-delete', 'ServiceController@delete')->name('delete_service');
+
+	Route::get('eiin-list', 'EIINController@index')->name('eiin_list');
+
+	Route::get('upcoming', 'DashboardController@upcoming_service')->name('upcoming');
 });
 
 Route::group(['namespace'=>'Frontend', 'prefix'=>'frontend', 'as'=>'frontend.'], function(){

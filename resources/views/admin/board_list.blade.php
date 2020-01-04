@@ -35,42 +35,64 @@
 
 	<div class="row">
 		@include('notification')
-		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>Sl.</th>
-					<th>Name</th>
-					<th>Status</th>
-					<th>Action</th>
-				</tr>
-			</thead>
+		<div class="col-12 col-md-6">
+			<div class="row">
+			
+				<div class="col-md-6 offset-3">
+					<form action="{{ route('backend.add_board') }}" method="post">
+						@csrf
+						<div class="form-group">
+							<label>Board Name</label>
+							<input type="text" name="board" class="form-control" required>
+						</div>
 
-			<tbody>
-				@foreach($boards as $board)
+						<div class="form-group">
+							<input type="submit" name="" value="Add Board" class="btn btn-sm btn-primary">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-12 col-md-6">
+
+			<table class="table table-bordered">
+				<thead>
 					<tr>
-						<td>{{ $loop->iteration }}</td>
-						<td>{{ $board->name }}</td>
-						<td>
-							@if( $board->status == 1 )
-								<span style="color: green;">Active</span>
-							@else
-								<span style="color: red;">Inactive</span>
-							@endif
-						</td>
-						<td>
-							<span>
-								<a href="#" data-toggle="modal" data-target="#edit_board_modal" onclick="arise_edit_modal_with_data('{{$board->id}}', '{{$board->name}}')">Edit</a> | 
-								<form action="{{ route('backend.board_delete') }}" method="post" style="display: hidden;">
-									@csrf
-									<input type="hidden" name="delete_board_input_id" value="{{ $board->id }}">
-									<button type="submit" style="border: none; padding: 0; margin: 0;background: none; display: inline;" onclick="return confirm('Are you sure to delete this board ?')">Delete</button>
-								</form>
-							</span>
-						</td>
+						<th>Sl.</th>
+						<th>Name</th>
+						<th>Status</th>
+						<th>Action</th>
 					</tr>
-				@endforeach
-			</tbody>
-		</table>
+				</thead>
+
+				<tbody>
+					@foreach($boards as $board)
+						<tr>
+							<td>{{ $loop->iteration }}</td>
+							<td>{{ $board->name }}</td>
+							<td>
+								@if( $board->status == 1 )
+									<span style="color: green;">Active</span>
+								@else
+									<span style="color: red;">Inactive</span>
+								@endif
+							</td>
+							<td>
+								<span>
+									<a href="#" data-toggle="modal" data-target="#edit_board_modal" onclick="arise_edit_modal_with_data('{{$board->id}}', '{{$board->name}}')">Edit</a> | 
+									<form action="{{ route('backend.board_delete') }}" method="post" style="display: hidden;">
+										@csrf
+										<input type="hidden" name="delete_board_input_id" value="{{ $board->id }}">
+										<button type="submit" style="border: none; padding: 0; margin: 0;background: none; display: inline;" onclick="return confirm('Are you sure to delete this board ?')">Delete</button>
+									</form>
+								</span>
+							</td>
+						</tr>
+					@endforeach
+				</tbody>
+			</table>
+		</div>
 	</div>
 @endsection
 

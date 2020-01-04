@@ -33,4 +33,9 @@ class DashboardController extends Controller
     										->orderBy('id', 'desc')->get()->count();
     	return view('admin.index', compact('today_total_pendings', 'today_total_successes', 'today_total_sent_sms', 'archieved_total_pendings', 'archieved_total_successes', 'archieved_total_sent_sms' ));
     }
+
+    public function upcoming_service()
+    {
+        return view('admin.upcoming');
+    }
 }

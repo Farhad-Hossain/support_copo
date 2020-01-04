@@ -36,4 +36,30 @@ class ServiceController extends Controller
     	}
 
     }
+    public function edit(Request $request)
+    {
+        $service_id = $request->service_id;
+        $service_name = $request->service_name;
+
+        try{
+            Service::findOrFail($service_id)->update([
+                'name' => $service_name,
+            ]);
+            return redirect()->back()->with('success', 'Service Updated !');
+        }catch(Exception $e){
+            return redirect()->back()->with('danger', 'Something went wrong !');
+        }
+
+
+    }
+    public function delete(Request $request)
+    {
+        try{
+            Service::findOrFail($request->service_id)->delete();
+            return redirect()->back()->with('success', 'Service Deleted Successfully');    
+        }catch(Exception $e){
+            return redirect()->back()->with('danger', 'Something went wrong');
+        }
+        
+    }
 }

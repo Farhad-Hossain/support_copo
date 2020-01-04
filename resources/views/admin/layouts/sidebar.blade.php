@@ -122,7 +122,7 @@
 
                         <ul class="submenu">
                             <li class="">
-                                <a href="form-elements.html">
+                                <a href="{{route('backend.eiin_list')}}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     EIIN List
                                 </a>
@@ -130,14 +130,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="">
-                                <a href="form-elements-2.html">
-                                    <i class="menu-icon fa fa-caret-right"></i>
-                                    Add EIIN
-                                </a>
-
-                                <b class="arrow"></b>
-                            </li>
+                            
                         </ul>
                     </li>
 
@@ -171,7 +164,7 @@
                     </li>
 
                     <li class="">
-                        <a href="gallery.html">
+                        <a href="{{ route('backend.upcoming') }}">
                             <i class="menu-icon fa fa-picture-o"></i>
                             <span class="menu-text"> Others </span>
                         </a>

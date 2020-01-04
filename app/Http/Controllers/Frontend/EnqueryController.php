@@ -63,7 +63,7 @@ class EnqueryController extends Controller
         $eiin = $request->eiin;
         $password = $request->password;
 
-        $enqueries = Enquery::where(['eiin'=>$eiin, 'eiin_password'=>$password])->get();
+        $enqueries = Enquery::where(['eiin'=>$eiin, 'eiin_password'=>$password])->orderBy('created_at', 'desc')->get();
         
         return view('view_history', compact('enqueries', 'eiin'));
     }
