@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EnqueryTrash extends Model
 {
-    protected $fillable = ['name', 'email', 'phone', 'board', 'eiin', 'service', 'doc1', 'doc2', 'message', 'status', 'feedback_message'];
+    protected $fillable = ['name', 'email', 'phone', 'board', 'eiin', 'eiin_password', 'student_reg', 'service', 'doc1', 'doc2', 'message', 'enquery_from', 'actioned_by', 'status', 'feedback_message'];
 
     public function board_name()
     {

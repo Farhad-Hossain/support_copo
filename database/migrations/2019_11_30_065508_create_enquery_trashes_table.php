@@ -20,11 +20,15 @@ class CreateEnqueryTrashesTable extends Migration
             $table->string('email');
             $table->tinyInteger('board');
             $table->integer('eiin')->nullable()->comment('Institute Number');
+            $table->string('eiin_password')->nullable()->comment('Institute Password');
+            $table->string('student_reg')->nullable()->comment('Registration Number');            
             $table->string('service');
             $table->text('message');
             $table->text('feedback_message')->nullable()->comment('feedback message to client');
             $table->string('doc1')->nullable();
             $table->string('doc2')->nullable();
+            $table->tinyInteger('enquery_from')->comment('1:Institute 2:Board');
+            $table->tinyInteger('actioned_by')->default('0')->comment('Who has made action in this query');
             $table->tinyInteger('status')->default(0)->comment('0.Pending 1.Sms Sended 2.Solved');
             $table->timestamps();
         });

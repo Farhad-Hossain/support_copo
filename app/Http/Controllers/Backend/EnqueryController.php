@@ -18,12 +18,12 @@ class EnqueryController extends Controller
     }
     public function archived_enqueries()
     {
-    	$enqueries_before_today = Enquery::where('created_at', '<', Carbon::today())->orderBy('id','desc')->get();
+    	$enqueries_before_today = Enquery::where('created_at', '<', Carbon::today())->orderBy('id','desc')->paginate(10);
     	return view('admin.archieved_enquries', compact('enqueries_before_today') );
     }
     public function trashed_enqueries()
     {
-        $trashed_enqueries = EnqueryTrash::orderBy('id','desc')->get();
+        $trashed_enqueries = EnqueryTrash::orderBy('id','desc')->paginate(10);
         return view('admin.trashed_enqueries', compact('trashed_enqueries') );
     }
 

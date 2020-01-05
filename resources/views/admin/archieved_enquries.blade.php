@@ -1,4 +1,4 @@
-@extends('admin.layouts.main', ['title'=>'Admin | Todays Enqueries'])
+@extends('admin.layouts.main', ['title'=>'Admin | Archieved Enqueries'])
 
 @section('custom_style')
 	<style type="text/css">
@@ -56,24 +56,26 @@
 			<tr>
 				<th>Sl.</th>
 				<th colspan="3">Name | Phone | Email</th>
-				<th>Board</th>
-				<th>EEIN</th>
-				<th>Service</th>
+				<th>Board | EIIN | Service</th>
 				<th colspan="2">Message | Feedback Message</th>
-				<th>Status</th>
+				<th>Status | By</th>
 				<th>Documents</th>
+				<th>Submit Time</th>
 				<th>Action</th>
 			</tr>
 		</thead>
 
-		<tbody>
+		<tbody style="font-size: 80%;">
 			@foreach($enqueries_before_today as $enquery)
 				<tr>
 					<td class="align-middle">{{ $loop->iteration }}</td>
 					<td colspan="3">{{ $enquery->name }} <hr /> {{ $enquery->phone }} <hr /> {{ $enquery->email }}</td>
-					<td class="align-middle">{{ $enquery->board_name->name }}</td>
-					<td class="align-middle">{{ $enquery->eiin }}</td>
-					<td class="align-middle">{{ $enquery->service }}</td>
+					<td class="align-middle">
+						{{ $enquery->board_name->name }} <hr/>
+						{{ $enquery->eiin }} - {{$enquery->eiin_password}}<hr />
+						{{ $enquery->service }}
+					</td>
+					
 					<td colspan="2" class="align-middle">{{ $enquery->message }} <div style="border: 1px solid lightgrey;"></div> {{ $enquery->feedback_message ?? 'n/a' }} </td>
 					<td class="align-middle">
 						@if( $enquery->status == 0 )
@@ -85,6 +87,11 @@
 						@elseif( $enquery->status == 3 )
 							<span style="color: red;">Rejected</span>
 						@endif
+						<hr />
+						<span style="color: red;">{{$enquery->actioned_user['name']}}</span>
+						<hr />
+						<span>{{$enquery->updated_at}}</span>
+						
 					</td>
 					<td class="align-middle">
 						@if($enquery->doc1 != 'n/a')
@@ -99,7 +106,9 @@
 							{{ 'n/a' }}
 						@endif
 					</td>
-					<td>
+					
+					<td>{{$enquery->created_at}}</td>
+					<td class="align-middle">
 						<span>
 							<a href="#" data-toggle="modal" onclick="sendSms('{{ $enquery->id }}','{{ $enquery->phone }}')" id="sendSmsBtn" data-target="#sendSmsModal">Send Sms</a> <hr />
 						</span>
@@ -108,7 +117,7 @@
 							<form action="{{ route('backend.make_enquery_done') }}" method="post">
 								@csrf
 								<input type="hidden" name="enquery_id" value="{{ $enquery->id }}">
-								<button type="submit" style="background: none; border: none; margin: 0; padding: 0; cursor: pointer;" class="text-primary;" onclick="return confirm('Sure ??')">Done</button> <hr />
+								<button type="submit" style="background: none; border: none; margin: 0; padding: 0; cursor: pointer; color: green;" class="text-danger;" onclick="return confirm('Sure ??')">Done</button> <hr />
 							</form>
 						</span>
 
@@ -124,6 +133,7 @@
 			@endforeach
 		</tbody>
 	</table>
+	{!! $enqueries_before_today->links() !!}
 @endsection
 
 @section('custom_script')
